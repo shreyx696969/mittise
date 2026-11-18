@@ -1,0 +1,664 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Domino Effect E-Summit 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Outfit:wght@300;500;600&display=swap">
+<style>
+  /* Layout: one calm reading column. A row of toppling dominoes opens the page, and each part of the plan carries its own colour: rounds are coral, amber and violet, the pitch is teal, judging is pink. */
+  :root {
+    --bg: #f4f5fb;
+    --surface: #ffffff;
+    --surface-2: #eceef8;
+    --fg: #181a2e;
+    --muted: #5a5e7c;
+    --line: #dde0ee;
+    --blue: #2457d6;
+    --coral: #d93a3f;
+    --amber: #f2a007;
+    --violet: #6b46e0;
+    --teal: #0b8577;
+    --pink: #c9318a;
+    --on: #ffffff;
+    --on-amber: #181a2e;
+    --font-display: "Outfit", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --font-body: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1020;
+      --surface: #171a30;
+      --surface-2: #1f2340;
+      --fg: #eceefb;
+      --muted: #a2a7c7;
+      --line: #2a2e50;
+      --blue: #7ea3ff;
+      --coral: #ff7e83;
+      --amber: #ffc34d;
+      --violet: #ab95ff;
+      --teal: #3fd3bf;
+      --pink: #ff7cc1;
+      --on: #0e1020;
+      --on-amber: #0e1020;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1020;
+    --surface: #171a30;
+    --surface-2: #1f2340;
+    --fg: #eceefb;
+    --muted: #a2a7c7;
+    --line: #2a2e50;
+    --blue: #7ea3ff;
+    --coral: #ff7e83;
+    --amber: #ffc34d;
+    --violet: #ab95ff;
+    --teal: #3fd3bf;
+    --pink: #ff7cc1;
+    --on: #0e1020;
+    --on-amber: #0e1020;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 400 1rem/1.65 var(--font-body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* colour roles: each element sets --c (fill) and --o (text on that fill) */
+  .c-blue   { --c: var(--blue);   --o: var(--on); }
+  .c-coral  { --c: var(--coral);  --o: var(--on); }
+  .c-amber  { --c: var(--amber);  --o: var(--on-amber); }
+  .c-violet { --c: var(--violet); --o: var(--on); }
+  .c-teal   { --c: var(--teal);   --o: var(--on); }
+  .c-pink   { --c: var(--pink);   --o: var(--on); }
+  .c-ink    { --c: var(--fg);     --o: var(--bg); }
+  .c-mute   { --c: var(--muted);  --o: var(--on); }
+
+  .page { max-width: 920px; margin: 0 auto; padding-block: 44px 88px; display: grid; gap: 72px; }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
+
+  /* hero */
+  .eyebrow { font: 500 0.75rem/1.2 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+  h1 { font: 500 clamp(2.7rem, 10vw, 4.8rem)/0.98 var(--font-display); letter-spacing: -0.035em; margin: 0; text-wrap: balance; }
+  .tagline { font: 300 clamp(1.05rem, 3.6vw, 1.45rem)/1.3 var(--font-display); letter-spacing: 0.16em; text-transform: uppercase; margin: 18px 0 0; }
+  .tagline::after { content: ""; display: block; width: 132px; height: 5px; border-radius: 3px; margin-top: 18px;
+    background: linear-gradient(90deg, var(--coral) 0 20%, var(--amber) 0 40%, var(--teal) 0 60%, var(--blue) 0 80%, var(--violet) 0 100%); }
+
+  .dominoes { display: flex; gap: 8px; align-items: flex-end; margin-top: 40px; padding: 4px 36px 0 4px; overflow: hidden; }
+  .tile { flex: 1 1 0; min-width: 0; max-width: 60px; height: 136px; border-radius: 9px; background: var(--c); color: var(--o);
+    display: flex; align-items: center; justify-content: center; position: relative;
+    transform-origin: bottom left; transform: rotate(calc(var(--i) * 2deg)); box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 55%, #000); }
+  .tile::before { content: ""; position: absolute; left: 7px; right: 7px; top: 50%; height: 2px; background: color-mix(in srgb, var(--o) 40%, transparent); }
+  .tile span { writing-mode: vertical-rl; font: 500 0.7rem/1 var(--font-mono); letter-spacing: 0.14em; background: var(--c); padding: 6px 0; position: relative; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+  .fact { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 0.88rem; }
+  .fact i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+  .toc a { display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px 7px 8px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--fg); text-decoration: none; font-size: 0.9rem; }
+  .toc a:hover { background: color-mix(in srgb, var(--c) 14%, var(--surface)); border-color: var(--c); }
+  .toc a b { width: 24px; height: 24px; border-radius: 8px; background: var(--c); color: var(--o); display: grid; place-items: center; font: 500 0.72rem var(--font-mono); }
+
+  /* section frame */
+  section { scroll-margin-top: 24px; min-width: 0; }
+  .sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+  .num { flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--c); color: var(--o); display: grid; place-items: center; font: 500 1.05rem var(--font-mono); }
+  h2 { font: 500 clamp(1.55rem, 5vw, 2.1rem)/1.12 var(--font-display); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+  h3 { font: 500 1.25rem/1.3 var(--font-display); letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+  h4 { font: 500 1.05rem/1.3 var(--font-display); margin: 0; }
+  p { margin: 0; max-width: 68ch; }
+  .stack-gap { display: grid; gap: 18px; }
+
+  .label { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font: 500 0.72rem/1.3 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .label::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+
+  .tint { background: color-mix(in srgb, var(--c) 12%, var(--surface)); border-radius: 16px; padding: 18px 20px; min-width: 0; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px 24px; min-width: 0; }
+
+  ul.dots { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  ul.dots li { position: relative; padding-left: 22px; max-width: 70ch; }
+  ul.dots li::before { content: ""; position: absolute; left: 0; top: 0.66em; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--blue)); }
+  ul.checks li { padding-left: 32px; }
+  ul.checks li::before { content: "\2713"; top: 0.2em; width: 20px; height: 20px; border-radius: 7px; background: var(--c); color: var(--o); font-size: 0.72rem; line-height: 20px; text-align: center; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+
+  /* overview */
+  .core { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 18px 22px; border-radius: 16px; background: var(--fg); color: var(--bg); }
+  .core .label { color: color-mix(in srgb, var(--bg) 70%, var(--fg)); margin: 0; }
+  .core .label::before { background: var(--amber); }
+  .core p { font: 400 1.15rem/1.4 var(--font-display); max-width: none; }
+  .bounds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .bounds .span { grid-row: span 2; }
+  @media (max-width: 640px) { .bounds { grid-template-columns: minmax(0, 1fr); } .bounds .span { grid-row: auto; } }
+
+  /* event definition cards */
+  .def h4 { margin-bottom: 6px; }
+
+  /* flow */
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; position: relative; }
+  .flow::before { content: ""; position: absolute; left: 19px; top: 24px; bottom: 24px; width: 2px; background: var(--line); }
+  .step { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .node { position: relative; z-index: 1; width: 40px; height: 40px; border-radius: 12px; background: var(--c); color: var(--o); display: grid; place-items: center; font: 500 1.05rem var(--font-mono); }
+  .sbody { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; display: grid; gap: 18px; min-width: 0; }
+  .stitle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0; font: 500 1.25rem/1.3 var(--font-display); letter-spacing: -0.01em; }
+  .when { font: 500 0.72rem/1 var(--font-mono); letter-spacing: 0.06em; padding: 6px 10px; border-radius: 99px; background: color-mix(in srgb, var(--c) 18%, var(--surface)); }
+  .face { flex: none; display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); width: 36px; height: 36px; padding: 6px; border-radius: 10px; background: var(--c); }
+  .face i { width: 6px; height: 6px; border-radius: 50%; background: var(--o); place-self: center; }
+  .mb { display: grid; gap: 14px; }
+  .mb .grid2 > div { background: var(--surface); border-radius: 12px; padding: 14px 16px; }
+  .mb .fallback { font-size: 0.95rem; }
+  .card h4 { margin-bottom: 8px; }
+  .card p + p { margin-top: 8px; }
+  .ex { background: var(--surface); border-radius: 12px; padding: 10px 14px; margin-top: 14px; font-size: 0.93rem; }
+  .ex .label { margin-bottom: 4px; }
+  .kv { margin-top: 12px; font-size: 0.95rem; }
+  .kv .label { margin-bottom: 2px; }
+  .beats { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; counter-reset: beat; }
+  .beats li { counter-increment: beat; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 99px; background: color-mix(in srgb, var(--c) 12%, var(--surface)); font-size: 0.92rem; }
+  .beats li::before { content: counter(beat); width: 22px; height: 22px; border-radius: 50%; background: var(--c); color: var(--o); display: grid; place-items: center; font: 500 0.72rem var(--font-mono); }
+  .audience { margin-top: 28px; display: grid; gap: 14px; }
+
+  /* schedule */
+  .axis, .srow { display: grid; grid-template-columns: 112px minmax(0, 1fr) minmax(180px, 36%); gap: 6px 20px; }
+  .axis { padding: 0 20px 8px; font: 500 0.72rem var(--font-mono); color: var(--muted); }
+  .axis div { grid-column: 3; display: flex; justify-content: space-between; }
+  .sched { display: grid; gap: 10px; }
+  .srow { align-items: center; padding: 14px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+  .time { font: 500 0.82rem var(--font-mono); color: var(--muted); }
+  .act { font-weight: 700; line-height: 1.35; }
+  .what { color: var(--muted); font-size: 0.93rem; line-height: 1.45; }
+  .track { position: relative; height: 12px; border-radius: 99px; background-color: var(--surface-2);
+    background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 33.3333% 100%; overflow: hidden; }
+  .fill { position: absolute; top: 0; bottom: 0; left: var(--s); width: var(--w); border-radius: 99px; background: var(--c); }
+  @media (max-width: 720px) {
+    .axis { display: none; }
+    .srow { grid-template-columns: minmax(0, 1fr); }
+    .time { order: -1; }
+  }
+
+  /* judging */
+  .scorebar { display: flex; gap: 3px; height: 48px; border-radius: 14px; overflow: hidden; }
+  .seg { flex: var(--p) 1 0; min-width: 0; background: var(--c); color: var(--o); display: grid; place-items: center; font: 500 1rem var(--font-display); }
+  .crits { margin-top: 18px; display: grid; }
+  .crit { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+  .crit:first-child { border-top: 0; }
+  .crit i { width: 14px; height: 14px; border-radius: 5px; background: var(--c); }
+  .crit b { font-weight: 700; }
+  .crit .pts { font: 500 1.35rem/1 var(--font-display); }
+  .crit .pts small { font: 500 0.7rem var(--font-mono); color: var(--muted); margin-left: 3px; }
+  .crit .desc { grid-column: 2 / -1; color: var(--muted); font-size: 0.95rem; }
+
+  /* logistics */
+  .kvlist { display: grid; }
+  .kvrow { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 4px 20px; padding: 14px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  .kvrow:first-child { border-top: 0; padding-top: 0; }
+  .kvrow:last-child { padding-bottom: 0; }
+  .kvrow b { font-weight: 700; }
+  .fig { font: 500 1.25rem var(--font-display); }
+  @media (max-width: 640px) { .kvrow { grid-template-columns: minmax(0, 1fr); } }
+
+  .people .tint .fig { font-size: 1.45rem; line-height: 1.2; }
+  .roles { display: grid; gap: 6px; }
+
+  /* closing chain */
+  .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 8px; }
+  .link { padding: 10px 16px; border-radius: 14px; background: var(--c); color: var(--o); font-weight: 500; font-size: 0.95rem; }
+  .arr { color: var(--muted); font-family: var(--font-mono); }
+  .foot { margin-top: 28px; font: 500 0.75rem/1.4 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+  @media (max-width: 480px) {
+    .page { gap: 56px; padding-block: 32px 64px; }
+    .sbody { padding: 18px 16px; }
+    .step { grid-template-columns: 34px minmax(0, 1fr); gap: 12px; }
+    .node { width: 34px; height: 34px; border-radius: 10px; font-size: 0.95rem; }
+    .flow::before { left: 16px; }
+    .panel { padding: 18px 16px; }
+  }
+</style>
+
+<main class="page">
+
+  <header>
+    <p class="eyebrow">DSCE IEDC · E-Summit 2026 · Revised event plan</p>
+    <h1>The Domino Effect</h1>
+    <p class="tagline">One move changes everything</p>
+
+    <div class="dominoes" role="img" aria-label="Seven dominoes labelled Idea, Risk, Failure, Decision, Opportunity, Growth and Impact, leaning as if falling">
+      <div class="tile c-blue" style="--i:0" aria-hidden="true"><span>IDEA</span></div>
+      <div class="tile c-amber" style="--i:1" aria-hidden="true"><span>RISK</span></div>
+      <div class="tile c-coral" style="--i:2" aria-hidden="true"><span>FAILURE</span></div>
+      <div class="tile c-violet" style="--i:3" aria-hidden="true"><span>DECISION</span></div>
+      <div class="tile c-teal" style="--i:4" aria-hidden="true"><span>OPPORTUNITY</span></div>
+      <div class="tile c-pink" style="--i:5" aria-hidden="true"><span>GROWTH</span></div>
+      <div class="tile c-ink" style="--i:6" aria-hidden="true"><span>IMPACT</span></div>
+    </div>
+
+    <div class="facts">
+      <span class="fact c-blue"><i></i>3 hours</span>
+      <span class="fact c-coral"><i></i>6–8 teams of 4–6</span>
+      <span class="fact c-teal"><i></i>3 judges</span>
+      <span class="fact c-pink"><i></i>100 points</span>
+    </div>
+
+    <nav class="toc" aria-label="Sections">
+      <a href="#overview" class="c-ink"><b>i</b>Overview</a>
+      <a href="#event" class="c-blue"><b>1</b>Event</a>
+      <a href="#flow" class="c-coral"><b>2</b>Event flow</a>
+      <a href="#timeline" class="c-amber"><b>3</b>Timeline</a>
+      <a href="#people" class="c-teal"><b>4</b>Participants</a>
+      <a href="#judging" class="c-pink"><b>5</b>Judging</a>
+      <a href="#crowd" class="c-violet"><b>6</b>Crowd</a>
+      <a href="#venue" class="c-blue"><b>7</b>Venue</a>
+      <a href="#logistics" class="c-coral"><b>8</b>Logistics</a>
+      <a href="#misc" class="c-teal"><b>9</b>Miscellaneous</a>
+    </nav>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="sec-head"><h2>Overview</h2></div>
+    <div class="stack-gap">
+      <p><strong>Chain Reaction — A Domino Effect Challenge.</strong> In this challenge, we hand each team an existing startup, presented under a fictional name, and ask them to run it with limited resources. Each decision creates consequences: a choice may unlock growth, cause a setback, or force a pivot. We expect teams to explain their decisions, respond to surprise market events, and pitch the strategy they would take forward.</p>
+
+      <div class="core"><span class="label">Core message</span><p>Entrepreneurship is a chain of decisions. One move can change everything.</p></div>
+
+      <h3>The startup: a real business under a fictional name</h3>
+      <p>The startup doesn't have to be invented. We can base the brief on an original, existing startup and present it under a fictional name. This gives teams clear boundaries for where they work, instead of an open blank page.</p>
+
+      <div class="bounds">
+        <div class="tint span c-blue">
+          <p class="label">What is fixed for every team (the boundaries):</p>
+          <ul class="dots">
+            <li><strong>Industry and product:</strong> what the startup sells and the problem it solves.</li>
+            <li><strong>Stage:</strong> for example, post-launch with early revenue, so teams know whether to build, sell, or scale.</li>
+            <li><strong>Target customer and market:</strong> who the startup serves and where.</li>
+            <li><strong>Resources:</strong> the starting budget, team size, and capacity limits stated in the brief.</li>
+            <li><strong>Constraints:</strong> the competitors, suppliers, and costs that exist in the startup's world.</li>
+          </ul>
+        </div>
+        <div class="tint c-violet">
+          <p class="label">What teams control:</p>
+          <p>The decisions. Where to spend the budget, which customers to prioritise, whom to hire, and when to pivot, all inside those boundaries. Teams cannot change what the startup is; they decide what it does next.</p>
+        </div>
+        <div class="tint c-amber">
+          <p class="label">Ground rules for using a real startup:</p>
+          <ul class="dots">
+            <li>We will use only public information, or details the founders have approved.</li>
+            <li>We will replace the real name and any identifying details, such as brand, logo, and founders' names.</li>
+            <li>We will give every team the same brief so the comparison stays fair.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 EVENT -->
+  <section id="event">
+    <div class="sec-head c-blue"><span class="num">1</span><h2>Event</h2></div>
+    <div class="grid2">
+      <div class="tint def c-blue"><p class="label">Format</p><p>Team-based startup simulation, closing with the Ripple Pitch: each team's three-minute story of how its first move set off a chain of consequences.</p></div>
+      <div class="tint def c-coral"><p class="label">Goal</p><p>Make thoughtful decisions, manage limited resources, adapt to changing conditions, and build a viable plan.</p></div>
+      <div class="tint def c-amber"><p class="label">Suggested team task</p><p>Each team receives the same startup brief (an existing startup under a fictional name), a starting budget, and decision options. After each round, consequences are revealed.</p></div>
+      <div class="tint def c-teal"><p class="label">Outcome</p><p>Teams present the decisions they made, what changed, and what they would do next.</p></div>
+    </div>
+  </section>
+
+  <!-- 2 FLOW -->
+  <section id="flow">
+    <div class="sec-head c-coral"><span class="num">2</span><h2>Event Flow — Full Run of Show</h2></div>
+
+    <ol class="flow">
+
+      <li class="step c-blue">
+        <span class="node">A</span>
+        <div class="sbody">
+          <h3 class="stitle">Pre-event setup (before attendees enter)</h3>
+          <ul class="dots">
+            <li>We will set up the entrance or the area beside the stage with oversized, lightweight domino props labelled IDEA, RISK, FAILURE, DECISION, OPPORTUNITY, GROWTH, and IMPACT. Each prop will be anchored firmly so it cannot topple into a walkway.</li>
+          </ul>
+          <div class="tint mb">
+            <p><strong>Make or buy? We decided on making them in-house and buying only the supplies.</strong> Oversized lightweight dominoes are rarely sold ready-made in the size we need, so buying would mean custom orders. Building them ourselves fits our DIY budget of ₹4,000–11,000 and the 2–3 week preparation window, and our IEDC members can paint and label them in E-Summit branding and control their weight and stability.</p>
+            <div class="grid2">
+              <div><p class="label">Buy</p><p>Foam board or cardboard sheets, paint, adhesive, stands or supports, and any printed backdrop or labels.</p></div>
+              <div><p class="label">Make</p><p>Cutting, painting, labelling, and assembling the dominoes, including the final IMPACT domino.</p></div>
+            </div>
+            <p class="fallback">If time runs short, we will commission a local print shop for foam-board cutouts instead.</p>
+          </div>
+          <ul class="dots">
+            <li>We will set up registration, team tables, a visible timer, projector, microphone, score desk, and clearly marked exits. Each team station will have its startup brief, decision sheets, budget tokens, and surprise-event cards.</li>
+            <li>We will brief the volunteers, judges, and host, test the domino effect, and prepare a prerecorded video or slide sequence as a backup.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-blue">
+        <span class="node">B</span>
+        <div class="sbody">
+          <h3 class="stitle">Opening — “The First Domino” <span class="when">2–3 minutes</span></h3>
+          <ul class="dots">
+            <li>Dim the stage lights and spotlight one domino. The host says: “Every chain reaction starts somewhere.”</li>
+            <li>A guest or event representative pushes the first domino. Use a safe, controlled physical chain reaction, or play the backup video if the setup is unreliable.</li>
+            <li>Reveal the E-Summit logo and theme: THE DOMINO EFFECT — ONE MOVE CHANGES EVERYTHING. The host links the visual to entrepreneurship: one decision can create consequences far beyond the first move.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-blue">
+        <span class="node">C</span>
+        <div class="sbody">
+          <h3 class="stitle">Registration and team briefing</h3>
+          <ul class="dots">
+            <li>We will check in attendees, assign team IDs, and direct teams to their tables. The host explains the objective, timing, scoring, and rules.</li>
+            <li>We will tell teams up front that there may not be one perfect answer: judges will score the reasoning behind decisions, not luck alone. Teams must record the decision they make and why.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-coral">
+        <span class="node">D</span>
+        <div class="sbody">
+          <h3 class="stitle"><span class="face" aria-hidden="true"><i style="grid-area:2/2"></i></span>Round 1 — “The First Domino”</h3>
+          <p>Every team gets the same startup pack, and it has four parts.</p>
+          <div class="grid2">
+            <div class="tint card">
+              <h4>Startup scenario</h4>
+              <p class="label" style="margin-top:10px">What it means</p>
+              <p>Who the startup is: its fictional name, what it sells, its stage, and its team size. It is the real startup's profile with identifying details removed.</p>
+              <div class="ex"><p class="label">Example</p><p>“NovaCart”, a 12-month-old grocery delivery app run by a team of five</p></div>
+            </div>
+            <div class="tint card">
+              <h4>Target customer</h4>
+              <p class="label" style="margin-top:10px">What it means</p>
+              <p>The specific group the startup serves, what they need, and what they use today instead.</p>
+              <div class="ex"><p class="label">Example</p><p>Working professionals in one city who want groceries within 30 minutes</p></div>
+            </div>
+            <div class="tint card">
+              <h4>Starting budget</h4>
+              <p class="label" style="margin-top:10px">What it means</p>
+              <p>The virtual money each team begins with, given as budget tokens. Every option on the decision sheet has a fixed token cost, and unspent tokens carry forward.</p>
+              <div class="ex"><p class="label">Example</p><p>The same amount for all teams, for example ₹10 lakh in tokens</p></div>
+            </div>
+            <div class="tint card">
+              <h4>Initial challenge</h4>
+              <p class="label" style="margin-top:10px">What it means</p>
+              <p>The first problem that forces a decision, with a number attached so teams can reason from evidence.</p>
+              <div class="ex"><p class="label">Example</p><p>Many downloads, but few customers order a second time</p></div>
+            </div>
+          </div>
+          <p>Teams then choose their first move from four options. Each option costs tokens, works at a different speed, and carries a different risk.</p>
+          <div class="grid2">
+            <div class="tint card c-blue">
+              <h4>Product development</h4>
+              <p class="kv"><span class="label">What it means</span>Spend on building or improving the product: new features, fixing defects, or a better prototype.</p>
+              <p class="kv c-teal"><span class="label">Possible upside</span>A stronger product that keeps customers and supports higher prices.</p>
+              <p class="kv c-coral"><span class="label">Possible risk</span>High cost, slow results, and the team may build something customers do not want.</p>
+            </div>
+            <div class="tint card c-amber">
+              <h4>Marketing</h4>
+              <p class="kv"><span class="label">What it means</span>Spend on reaching customers: ads, promotions, social media, or local outreach.</p>
+              <p class="kv c-teal"><span class="label">Possible upside</span>Fast visibility and new customers.</p>
+              <p class="kv c-coral"><span class="label">Possible risk</span>Money goes quickly, and a weak product or message wastes it.</p>
+            </div>
+            <div class="tint card c-violet">
+              <h4>Customer research</h4>
+              <p class="kv"><span class="label">What it means</span>Spend on talking to customers through surveys, interviews, and tests to learn what they need and will pay for.</p>
+              <p class="kv c-teal"><span class="label">Possible upside</span>Clear evidence for later decisions, at low cost.</p>
+              <p class="kv c-coral"><span class="label">Possible risk</span>No immediate growth, and competitors may move first.</p>
+            </div>
+            <div class="tint card c-pink">
+              <h4>Hiring</h4>
+              <p class="kv"><span class="label">What it means</span>Spend on adding people, such as a developer, salesperson, or operations hire.</p>
+              <p class="kv c-teal"><span class="label">Possible upside</span>More capacity to build, sell, or deliver.</p>
+              <p class="kv c-coral"><span class="label">Possible risk</span>Salaries keep reducing the budget in every later round.</p>
+            </div>
+          </div>
+          <ul class="dots">
+            <li>Teams submit the choice and a short reason before the deadline. The reason is one or two sentences naming the logic or evidence behind the choice.</li>
+            <li>The coordinator reveals the immediate consequence and updates each team's budget or progress sheet.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-amber">
+        <span class="node">E</span>
+        <div class="sbody">
+          <h3 class="stitle"><span class="face" aria-hidden="true"><i style="grid-area:1/1"></i><i style="grid-area:3/3"></i></span>Round 2 — “Chain Reaction”</h3>
+          <ul class="dots">
+            <li>Teams make follow-up decisions using the new situation created by Round 1. They must track money, customer response, team capacity, and business risk.</li>
+            <li>The facilitator introduces surprise market-event cards, such as a competitor launching a similar product, a supplier delay, unexpected customer feedback, a sudden cost increase, or a partnership offer.</li>
+            <li>Teams decide how to respond and explain the trade-off. Update scores and resources consistently across teams.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-mute">
+        <span class="node">F</span>
+        <div class="sbody">
+          <h3 class="stitle">Break and score update</h3>
+          <ul class="dots">
+            <li>Collect decision sheets, update the score tracker, and give teams a short break. Announce only the information needed to keep the game moving; avoid revealing other teams' private strategy sheets.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-violet">
+        <span class="node">G</span>
+        <div class="sbody">
+          <h3 class="stitle"><span class="face" aria-hidden="true"><i style="grid-area:1/1"></i><i style="grid-area:2/2"></i><i style="grid-area:3/3"></i></span>Round 3 — “The Turning Point”</h3>
+          <p>For us, the turning point is the moment when the results of Rounds 1 and 2 meet a situation that repeating the same moves cannot solve. We want to see whether a team can read its own evidence, accept a trade-off, and either commit to its path or change course.</p>
+          <p>Every team receives one major turning-point scenario, and we will draw the scenarios so that their difficulty is comparable across teams.</p>
+          <div class="grid2">
+            <div class="tint card c-coral">
+              <h4>Weak sales</h4>
+              <p class="kv"><span class="label">What happens</span>Customers try the product, but few buy or return, and cash is running down.</p>
+              <p class="kv"><span class="label">Decision the team must make</span>Cut costs, fix the product, or change who it sells to?</p>
+            </div>
+            <div class="tint card c-teal">
+              <h4>Strong demand, low capacity</h4>
+              <p class="kv"><span class="label">What happens</span>Orders exceed what the team can deliver, and delays threaten its reputation.</p>
+              <p class="kv"><span class="label">Decision the team must make</span>Invest in growth, hire, seek a partner, or limit orders to protect quality?</p>
+            </div>
+            <div class="tint card c-amber">
+              <h4>Product failure</h4>
+              <p class="kv"><span class="label">What happens</span>A serious defect or complaint damages customer trust.</p>
+              <p class="kv"><span class="label">Decision the team must make</span>Pause to fix it, communicate openly, or push on with the rest of the plan?</p>
+            </div>
+            <div class="tint card c-blue">
+              <h4>Chance to pivot</h4>
+              <p class="kv"><span class="label">What happens</span>Early data shows a different customer segment wants the product more.</p>
+              <p class="kv"><span class="label">Decision the team must make</span>Stay with the original customer or pivot, and at what cost?</p>
+            </div>
+          </div>
+          <ul class="dots">
+            <li>Teams choose whether to continue, change direction, cut costs, seek a partner, or invest in growth.</li>
+            <li>They must state what evidence supports the choice and what risk remains. Evidence can come from the team's own sheets: remaining budget, customer response in earlier rounds, and the surprise events it handled.</li>
+            <li>Each team prepares a concise final pitch connecting its first decision to the final outcome.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-teal">
+        <span class="node">H</span>
+        <div class="sbody">
+          <h3 class="stitle">Final round — “The Ripple Pitch”</h3>
+          <ul class="dots">
+            <li>Each team gives a 3-minute pitch, followed by brief judge questions if time allows.</li>
+            <li>Suggested pitch structure:
+              <ol class="beats">
+                <li>our startup and first move</li>
+                <li>the chain of consequences</li>
+                <li>the biggest challenge or turning point</li>
+                <li>how we adapted</li>
+                <li>our final strategy and next step</li>
+              </ol>
+            </li>
+            <li>Judges score teams using the published rubric. A timekeeper gives a 30-second warning and stops pitches at the limit.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="step c-pink">
+        <span class="node">I</span>
+        <div class="sbody">
+          <h3 class="stitle">Judging, results, and closing</h3>
+          <ul class="dots">
+            <li>Judges compare score sheets and resolve any ties using the published tie-breakers. The host announces winners and recognises strong strategic thinking, adaptability, and teamwork.</li>
+            <li>Close by returning to the theme: every startup is shaped by a series of decisions. Reveal or point to the final domino labelled IMPACT.</li>
+            <li>Optional audience activation: invite attendees to add a small domino card to the Domino Wall answering, “What's one move you've been putting off?” Take approved photos and share a feedback QR code.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+
+    <div class="audience">
+      <h3>Optional audience activations</h3>
+      <div class="grid3">
+        <div class="tint c-blue"><h4>Domino Wall</h4><p>Attendees add a small card with an idea, ambition, or one move they want to make.</p></div>
+        <div class="tint c-amber"><h4>Chain Reaction Passport</h4><p>Attendees collect marks for joining sessions, activities, or networking conversations.</p></div>
+        <div class="tint c-teal"><h4>One Connection Away</h4><p>Give attendees simple prompts to meet someone with a complementary skill, idea, or interest.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 TIMELINE -->
+  <section id="timeline">
+    <div class="sec-head c-amber"><span class="num">3</span><h2>Timeline — 3 Hours</h2></div>
+    <div class="axis" aria-hidden="true"><div><span>0:00</span><span>1:00</span><span>2:00</span><span>3:00</span></div></div>
+    <div class="sched">
+      <div class="srow c-blue"><span class="time">00:00–00:10</span><div><div class="act">Registration &amp; briefing</div><div class="what">Check-in, team IDs, rules, startup packs</div></div><div class="track"><span class="fill" style="--s:0%;--w:5.5556%"></span></div></div>
+      <div class="srow c-coral"><span class="time">00:10–00:30</span><div><div class="act">Round 1: The First Domino</div><div class="what">Startup brief and first decision</div></div><div class="track"><span class="fill" style="--s:5.5556%;--w:11.1111%"></span></div></div>
+      <div class="srow c-amber"><span class="time">00:30–01:05</span><div><div class="act">Round 2: Chain Reaction</div><div class="what">Follow-up decisions and surprise events</div></div><div class="track"><span class="fill" style="--s:16.6667%;--w:19.4444%"></span></div></div>
+      <div class="srow c-mute"><span class="time">01:05–01:15</span><div><div class="act">Break &amp; score update</div><div class="what">Refreshments, scoring and reset</div></div><div class="track"><span class="fill" style="--s:36.1111%;--w:5.5556%"></span></div></div>
+      <div class="srow c-violet"><span class="time">01:15–01:40</span><div><div class="act">Round 3: The Turning Point</div><div class="what">Major challenge, pivot, final strategy</div></div><div class="track"><span class="fill" style="--s:41.6667%;--w:13.8889%"></span></div></div>
+      <div class="srow c-teal"><span class="time">01:40–02:20</span><div><div class="act">Ripple Pitch</div><div class="what">Up to 8 teams × 3 minutes plus transitions/questions</div></div><div class="track"><span class="fill" style="--s:55.5556%;--w:22.2222%"></span></div></div>
+      <div class="srow c-pink"><span class="time">02:20–02:45</span><div><div class="act">Judging &amp; deliberation</div><div class="what">Final scores and tie-breaks</div></div><div class="track"><span class="fill" style="--s:77.7778%;--w:13.8889%"></span></div></div>
+      <div class="srow c-pink"><span class="time">02:45–03:00</span><div><div class="act">Results &amp; closing</div><div class="what">Awards, final domino message, feedback</div></div><div class="track"><span class="fill" style="--s:91.6667%;--w:8.3333%"></span></div></div>
+    </div>
+  </section>
+
+  <!-- 4 PARTICIPANTS -->
+  <section id="people" class="people">
+    <div class="sec-head c-teal"><span class="num">4</span><h2>Number of Participants</h2></div>
+    <div class="grid3">
+      <div class="tint c-teal"><p class="label">Teams</p><p><strong class="fig">6–8 teams</strong> of 4–6 participants (approximately 32–48 participants including small variations).</p></div>
+      <div class="tint c-amber"><p class="label">Recommended maximum</p><p><strong class="fig">8 teams</strong> for a 3-hour event with pitches. More teams require a longer pitch session or parallel judging.</p></div>
+      <div class="tint c-violet">
+        <p class="label">Judges, volunteers, audience</p>
+        <div class="roles">
+          <p><strong>Judges:</strong> 3.</p>
+          <p><strong>Volunteers:</strong> 8–12.</p>
+          <p><strong>Audience:</strong> optional 30–60, depending on venue capacity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 JUDGING -->
+  <section id="judging">
+    <div class="sec-head c-pink"><span class="num">5</span><h2>Judging Criteria (100 Points)</h2></div>
+    <div class="panel">
+      <div class="scorebar" role="img" aria-label="Points: strategic decisions 25, adaptability 20, financial management 20, creativity and problem-solving 15, business viability 10, pitch and teamwork 10">
+        <div class="seg c-blue" style="--p:25">25</div>
+        <div class="seg c-violet" style="--p:20">20</div>
+        <div class="seg c-teal" style="--p:20">20</div>
+        <div class="seg c-pink" style="--p:15">15</div>
+        <div class="seg c-amber" style="--p:10">10</div>
+        <div class="seg c-coral" style="--p:10">10</div>
+      </div>
+      <div class="crits">
+        <div class="crit c-blue"><i></i><b>Strategic decisions</b><span class="pts">25<small>pts</small></span><span class="desc">Clear logic, priorities, and trade-offs</span></div>
+        <div class="crit c-violet"><i></i><b>Adaptability</b><span class="pts">20<small>pts</small></span><span class="desc">Response to surprises and ability to pivot</span></div>
+        <div class="crit c-teal"><i></i><b>Financial management</b><span class="pts">20<small>pts</small></span><span class="desc">Budget discipline and sensible resource use</span></div>
+        <div class="crit c-pink"><i></i><b>Creativity &amp; problem-solving</b><span class="pts">15<small>pts</small></span><span class="desc">Original, practical responses</span></div>
+        <div class="crit c-amber"><i></i><b>Business viability</b><span class="pts">10<small>pts</small></span><span class="desc">Customer need, feasibility, and growth potential</span></div>
+        <div class="crit c-coral"><i></i><b>Pitch &amp; teamwork</b><span class="pts">10<small>pts</small></span><span class="desc">Clarity, shared contribution, and concise delivery</span></div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="tint c-teal"><p class="label">Fairness</p><p>We will give teams comparable scenarios and consistent rules, and we will score the quality of the reasoning, not random luck.</p></div>
+      <div class="tint c-violet"><p class="label">Tie-breakers</p><p>Strategic decisions first, then adaptability.</p></div>
+    </div>
+  </section>
+
+  <!-- 6 CROWD -->
+  <section id="crowd">
+    <div class="sec-head c-violet"><span class="num">6</span><h2>Crowd Management</h2></div>
+    <div class="panel c-violet">
+      <ul class="dots">
+        <li>Use separate zones for registration, team tables, stage/pitch area, judge/score desk, and audience seating.</li>
+        <li>Keep entrances, exits, and aisles clear. Secure props and cables; do not run a domino chain across a public walkway.</li>
+        <li>Assign roles: 2 registration volunteers; 3–4 round coordinators; 2 scorekeepers; 2–4 stage/AV and crowd-support volunteers. One person should own the master timeline.</li>
+        <li>Use a visible timer, clear announcements, team labels, and a fixed deadline for collecting every decision sheet.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 VENUE -->
+  <section id="venue">
+    <div class="sec-head c-blue"><span class="num">7</span><h2>Venue</h2></div>
+    <div class="panel c-blue">
+      <ul class="dots">
+        <li><strong>Best option:</strong> seminar hall or classroom with movable tables, a projector, microphone, and room for a small stage/installation.</li>
+        <li>An auditorium can work if there is a separate team-work area; otherwise discussion may be difficult.</li>
+        <li>Confirm seating capacity, ventilation, power outlets, accessibility, sound, projector visibility, and permission to install props.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8 LOGISTICS -->
+  <section id="logistics">
+    <div class="sec-head c-coral"><span class="num">8</span><h2>Logistics and Props</h2></div>
+    <div class="panel">
+      <div class="kvlist">
+        <div class="kvrow"><b>Theme installation (made in-house):</b><span>15–25 oversized lightweight domino props; labels/paint; stands or supports; backdrop; one final IMPACT domino.</span></div>
+        <div class="kvrow"><b>Game materials:</b><span>startup briefs, decision sheets, surprise-event cards, virtual-budget tokens or trackers, pens, calculators, team IDs, printed scoring rubrics.</span></div>
+        <div class="kvrow"><b>AV and operations:</b><span>laptop, projector, microphone, timer, spreadsheet or score board, extension cords, tape, signage, and printed backups.</span></div>
+        <div class="kvrow"><b>Indicative DIY theme-material budget:</b><span><span class="fig">₹4,000–₹11,000</span>, excluding venue, AV rental, food, guest travel, and prizes.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 MISC -->
+  <section id="misc">
+    <div class="sec-head c-teal"><span class="num">9</span><h2>Miscellaneous</h2></div>
+    <div class="panel c-teal">
+      <ul class="dots checks">
+        <li>We will allow 2–3 weeks of preparation and pilot the game with a small group to check that the scoring, surprise cards, and round timings are understandable.</li>
+        <li>We will publish team size, eligibility, registration deadline, event duration, and what participants should bring.</li>
+        <li>We will prepare contingencies: printed forms, manual scoring, spare scenarios, spare markers/tape, and a prerecorded opening sequence.</li>
+        <li>After the event, we will collect feedback and share only approved photos, and we will keep the closing message short and tied back to the theme.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ONE LINE -->
+  <section id="oneline">
+    <div class="sec-head"><h2>The Experience in One Line</h2></div>
+    <div class="chain">
+      <span class="link c-blue">See the dominoes</span><span class="arr">→</span>
+      <span class="link c-coral">make the first decision</span><span class="arr">→</span>
+      <span class="link c-amber">face the consequences</span><span class="arr">→</span>
+      <span class="link c-violet">adapt at the turning point</span><span class="arr">→</span>
+      <span class="link c-teal">pitch the outcome</span><span class="arr">→</span>
+      <span class="link c-ink">reveal IMPACT</span>
+    </div>
+    <p class="foot">DSCE IEDC · E-Summit 2026 · The Domino Effect</p>
+  </section>
+
+</main>
+
+</body></html>
